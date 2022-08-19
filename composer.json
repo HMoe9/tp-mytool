@@ -1,0 +1,29 @@
+{
+    "name": "hmoe9/tp-mytool",
+    "description": "The ThinkPHP6 Common Package",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "HMoe9",
+            "email": "hmoe9@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "topthink/framework": "^6.0.3",
+        "topthink/think-orm": "^2.0.33",
+        "topthink/think-helper":"^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "tp\\mytool\\": "src"
+        }
+    },
+    "extra": {
+        "think": {
+            "services": [
+                "tp\\mytool\\package\\Service"
+            ]
+        }
+    }
+}
