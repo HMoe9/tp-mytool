@@ -17,14 +17,17 @@ class ReflectionManager extends MetadataCollector
     protected static $container = [];
 
     /**
-     * @throws RuntimeException
+     * @param string $className
+     *
+     * @return ReflectionClass
      * @throws ReflectionException
+     * @throws RuntimeException
      */
     public static function reflectClass(string $className): ReflectionClass
     {
         if (!isset(static::$container['class'][$className])) {
             if (!class_exists($className) && !interface_exists($className) && !trait_exists($className)) {
-                throw new RuntimeException("Class {$className} not exist");
+                throw new RuntimeException(sprintf('Class %s not exist', $className));
             }
             static::$container['class'][$className] = new ReflectionClass($className);
         }
@@ -32,11 +35,19 @@ class ReflectionManager extends MetadataCollector
     }
 
     /**
-     * @throws RuntimeException
+     * @param string $className
+     * @param bool $newInstance
+     *
+     * @return mixed|object
      * @throws ReflectionException
+     * @throws RuntimeException
      */
-    public static function getInstance(string $className)
+    public static function getInstance(string $className, bool $newInstance = false)
     {
+        if ($newInstance) {
+            return static::reflectClass($className)->newInstance();
+        }
+
         if (!isset(static::$container['instance'][$className])) {
             static::$container['instance'][$className] = static::reflectClass($className)->newInstance();
         }
@@ -44,8 +55,12 @@ class ReflectionManager extends MetadataCollector
     }
 
     /**
-     * @throws RuntimeException
+     * @param string $className
+     * @param string $method
+     *
+     * @return ReflectionMethod
      * @throws ReflectionException
+     * @throws RuntimeException
      */
     public static function reflectMethod(string $className, string $method): ReflectionMethod
     {
@@ -57,8 +72,12 @@ class ReflectionManager extends MetadataCollector
     }
 
     /**
-     * @throws RuntimeException
+     * @param string $className
+     * @param string $property
+     *
+     * @return ReflectionProperty
      * @throws ReflectionException
+     * @throws RuntimeException
      */
     public static function reflectProperty(string $className, string $property): ReflectionProperty
     {

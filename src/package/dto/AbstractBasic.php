@@ -13,18 +13,15 @@ abstract class AbstractBasic implements Arrayable, ArrayAccess
     /**
      * param 数组转 dto 对象
      *
-     * @author HMoe9 <hmoe9@qq.com>
-     *
      * @param array $param
+     * @param bool $newInstance
      *
      * @return AbstractBasic
      */
-    abstract public static function getDTO(array $param): AbstractBasic;
+    abstract public static function getDTO(array $param, bool $newInstance = false): AbstractBasic;
 
     /**
      * 对象属性转数组
-     *
-     * @author HMoe9 <hmoe9@qq.com>
      *
      * @return array
      */

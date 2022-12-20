@@ -11,8 +11,6 @@ trait ValidateBuiltinTypeTrait
     /**
      * 字符串类型字段校验
      *
-     * @author HMoe9 <hmoe9@qq.com>
-     *
      * @param $field
      *
      * @return Closure

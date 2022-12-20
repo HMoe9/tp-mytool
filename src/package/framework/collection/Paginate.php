@@ -10,8 +10,6 @@ trait Paginate
     /**
      * 转数组
      *
-     * @author HMoe9 <hmoe9@qq.com>
-     *
      * @param Paginator $paginator
      *
      * @return array

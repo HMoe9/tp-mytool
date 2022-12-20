@@ -13,17 +13,16 @@ class Helper
     /**
      * param 转 dto
      *
-     * @author HMoe9 <hmoe9@qq.com>
-     *
      * @param array $param
      * @param string $className
      * @param string $docComment
+     * @param bool $newInstance
      *
      * @return AbstractBasic
-     * @throws RuntimeException
      * @throws ReflectionException
+     * @throws RuntimeException
      */
-    public static function copyParamByClass(array $param, string $className, string $docComment = ''): AbstractBasic
+    public static function copyParamByClass(array $param, string $className, string $docComment = '', bool $newInstance = false): AbstractBasic
     {
         if (empty($docComment)) {
             $reflectionClass = ReflectionManager::reflectClass($className);
@@ -31,7 +30,7 @@ class Helper
         }
 
         /** @var AbstractBasic $instance */
-        $instance = ReflectionManager::getInstance($className);
+        $instance = ReflectionManager::getInstance($className, $newInstance);
         if (!($instance instanceof AbstractBasic)) {
             throw new RuntimeException(sprintf('类必须是 %s 的实例', AbstractBasic::class));
         }
@@ -43,11 +42,12 @@ class Helper
 
                 foreach ($fieldList as $field) {
                     if (isset($param[$field])) {
-                        $value       = $param[$field];
-                        $pregMatch   = preg_match(sprintf(Regex::MATCH_DTO_DOC_BUILTIN_TYPE, $field), $docComment, $matchBuiltinType);
+                        $value     = $param[$field];
+                        $pregMatch = preg_match(sprintf(Regex::MATCH_DTO_DOC_BUILTIN_TYPE, $field), $docComment,
+                            $matchBuiltinType);
                         if ($pregMatch > 0) {
                             $builtinType = current($matchBuiltinType);
-                            $value = self::parse($value, $builtinType);
+                            $value       = self::parse($value, $builtinType);
                         }
 
                         $instance->$field = $value;
@@ -64,25 +64,23 @@ class Helper
     /**
      * param 转 dto
      *
-     * @author HMoe9 <hmoe9@qq.com>
-     *
      * @param array $param
      * @param AbstractBasic $instance
+     * @param string $docComment
+     * @param bool $newInstance
      *
      * @return AbstractBasic
-     * @throws RuntimeException
      * @throws ReflectionException
+     * @throws RuntimeException
      */
-    public static function copyParamByInstance(array $param, AbstractBasic $instance): AbstractBasic
+    public static function copyParamByInstance(array $param, AbstractBasic $instance, string $docComment = '', bool $newInstance = false): AbstractBasic
     {
         $className = get_class($instance);
-        return static::copyParamByClass($param, $className);
+        return static::copyParamByClass($param, $className, $docComment, $newInstance);
     }
 
     /**
      * 对应类型处理
-     *
-     * @author HMoe9 <hmoe9@qq.com>
      *
      * @param $value
      * @param string $builtinType 内置类型,多个 '|' 分割 ex: int|null

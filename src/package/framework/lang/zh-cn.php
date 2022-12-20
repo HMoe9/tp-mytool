@@ -11,5 +11,6 @@ return [
     ':attribute not a valid datetime'             => ':attribute 不是一个有效的日期或时间格式',
     'max size of :attribute must be :rule'        => ':attribute 字段值长度不能超过 :rule',
     ':attribute not a valid url'                  => ':attribute 不是有效的 URL 地址',
+    ':attribute not a valid mobile'               => ':attribute 字段值不是一个有效的手机号',
     ':attribute must between :1 - :2'             => ':attribute 字段值有误,必须在 :1 - :2 范围内',
 ];

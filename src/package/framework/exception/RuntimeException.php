@@ -19,7 +19,7 @@ class RuntimeException extends Exception
     }
 
     /**
-     * @return array|mixed
+     * @return array
      */
     public function getRaw(): array
     {
