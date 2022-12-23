@@ -1,20 +1,20 @@
 <?php
 declare (strict_types=1);
 
-namespace tp\mytool\test;
+namespace tp\mytool\tests;
 
 use ReflectionException;
 use PHPUnit\Framework\TestCase;
 use tp\mytool\package\framework\exception\RuntimeException;
-use tp\mytool\test\dto\DemoParamDTO;
+use tp\mytool\tests\dto\DemoParamDTO;
 
-class Test extends TestCase
+class DTOTest extends TestCase
 {
     /**
      * @throws ReflectionException
      * @throws RuntimeException
      */
-    public function demo()
+    public function testDemo()
     {
         $param = [
             'id'   => 1,

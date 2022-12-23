@@ -21,7 +21,7 @@ final class Regex
      * @property-read string|null $name
      * 匹配 int 或 string|null
      */
-    const MATCH_DTO_DOC_BUILTIN_TYPE = '/[\w|\w\|]+(?=\s*\$%s)/';
+    const MATCH_DTO_DOC_FIELD_TYPE = '/[\w|\w\|]+(?=\s*\$%s)/';
 
     /**
      * 匹配手机号

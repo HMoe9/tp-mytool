@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace tp\mytool\test\dto;
+namespace tp\mytool\tests\dto;
 
 use tp\mytool\package\dto\AbstractParamDTO;
 use tp\mytool\package\dto\ValidateBuiltinTypeTrait;
