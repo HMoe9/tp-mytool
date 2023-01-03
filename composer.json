@@ -1,6 +1,6 @@
 {
     "name": "hmoe9/tp-mytool",
-    "description": "The ThinkPHP6 Common Package",
+    "description": "The ThinkPHP6 DTO Package",
     "license": "Apache-2.0",
     "authors": [
         {
