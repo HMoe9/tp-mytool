@@ -17,6 +17,12 @@ use ReflectionException;
 trait ConfigAttributeTrait
 {
     /**
+     * 最大查询深度
+     * @var int
+     */
+    protected static $recursion_depth = 10;
+
+    /**
      * @param array $param
      * @param bool $newInstance
      *
@@ -33,7 +39,7 @@ trait ConfigAttributeTrait
 
         $parentClassList   = [];
         $parentClassList[] = $getParentClass;
-        $recursionDepth    = 10; // 最大查询深度
+        $recursionDepth    = static::$recursion_depth;
         while ($getParentClass = get_parent_class($getParentClass)) {
 
             $parentClassList[] = $getParentClass;

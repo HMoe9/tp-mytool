@@ -21,13 +21,37 @@ abstract class AbstractBasic implements Arrayable, ArrayAccess
     abstract public static function getDTO(array $param, bool $newInstance = false): AbstractBasic;
 
     /**
-     * 对象属性转数组
+     * dto 转数组
      *
      * @return array
      */
     public function toArray(): array
     {
-        return $this->getData();
+        $data = $this->getData();
+        foreach ($data as &$value) {
+            $value = $this->nestedToArray($value);
+        }
+        return $data;
+    }
+
+    /**
+     * 嵌套数组 dto 对象转化
+     *
+     * @param $nestedValue
+     *
+     * @return array|mixed
+     */
+    private function nestedToArray($nestedValue)
+    {
+        if (is_array($nestedValue)) {
+            foreach ($nestedValue as &$value) {
+                $value = $this->nestedToArray($value);
+            }
+        } elseif ($nestedValue instanceof AbstractBasic) {
+            $nestedValue = $nestedValue->toArray();
+        }
+
+        return $nestedValue;
     }
 
     protected function set($key, $value): void
